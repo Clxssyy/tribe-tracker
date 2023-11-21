@@ -45,10 +45,20 @@ module.exports = {
 
     for (let i = 0; i < accounts.length; i++) {
       let date = accounts[i].lastLogin;
-      const lastLoginTime = new Date(date);
-      const currentTime = new Date();
-      const timeDifference = Math.abs(currentTime - lastLoginTime);
-      const hoursSinceLastLogin = Math.floor(timeDifference / (1000 * 60 * 60));
+      let hoursSinceLastLogin = '';
+
+      if (!date) {
+        hoursSinceLastLogin = 'Never';
+      } else {
+        const lastLoginTime = new Date(date);
+        const currentTime = new Date();
+        const timeDifference = Math.abs(currentTime - lastLoginTime);
+        hoursSinceLastLogin = Math.floor(
+          timeDifference / (1000 * 60 * 60)
+        );
+        hoursSinceLastLogin = `${hoursSinceLastLogin} hours ago`;
+      }
+
       fields.push(
         { name: accounts[i].name, value: '\u200B', inline: true },
         {
@@ -57,8 +67,8 @@ module.exports = {
           inline: true,
         },
         {
-          name: accounts[i].lastUser,
-          value: `${String(hoursSinceLastLogin)} hour(s) ago`,
+          name: accounts[i].lastUser ? accounts[i].lastUser : 'No one',
+          value: `${hoursSinceLastLogin}`,
           inline: true,
         }
       );
@@ -67,7 +77,9 @@ module.exports = {
     const response = await new EmbedBuilder()
       .setColor(0x6ab7dd)
       .setTitle('Tribe Activity')
-      .setDescription(`Shared Account Status\n\nClick the buttons below to clock in or out!\n\nOnly works if you use it correctly!`)
+      .setDescription(
+        `Shared Account Status\n\nClick the buttons below to clock in or out!\n\nOnly works if you use it correctly!`
+      )
       .addFields(fields)
       .setTimestamp();
 
