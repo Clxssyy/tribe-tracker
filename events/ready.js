@@ -19,7 +19,7 @@ module.exports = {
       client.guilds.cache.forEach((guild) => console.log(guild.name))
     );
     client.user.setPresence({
-      activities: [{ name: 'wack a mole' }],
+      activities: [{ name: 'Whac-A-Mole' }],
       status: 'online',
     });
   },
