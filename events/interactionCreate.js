@@ -14,6 +14,19 @@ module.exports = {
   async execute(interaction) {
     if (interaction.isButton()) {
       if (interaction.customId === 'login') {
+        const data = await accountSchema.findOne({
+          currentUser: interaction.user.tag,
+        });
+        if (data) {
+          return interaction.reply({
+            ephemeral: true,
+            content:
+              "You're already logged in as **" +
+              data.name +
+              '**!\nPlease logout first!',
+          });
+        }
+
         let buttons = [];
 
         try {
@@ -90,9 +103,9 @@ module.exports = {
           return interaction.reply({
             ephemeral: true,
             content:
-              "You're already logged in as " +
+              "You're already logged in as **" +
               data.name +
-              '! Please logout first.',
+              '**!\nPlease logout first!',
           });
         } else {
           await accountSchema.findOneAndUpdate(
@@ -109,7 +122,7 @@ module.exports = {
 
           interaction.reply({
             ephemeral: true,
-            content: `You have logged in as ${interaction.component.label}! Please logout when you're done.`,
+            content: `You have logged in as **${interaction.component.label}**!\nPlease logout when you're done.`,
           });
         }
       }
