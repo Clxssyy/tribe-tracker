@@ -78,7 +78,7 @@ module.exports = {
       .setColor(0x6ab7dd)
       .setTitle('Tribe Activity')
       .setDescription(
-        `Shared Account Status\n\nClick the buttons below to clock in or out!\n\nOnly works if you use it correctly!`
+        `Click the buttons below to clock in or out!\n\nOnly works if you use it correctly!`
       )
       .addFields(fields)
       .setTimestamp();
