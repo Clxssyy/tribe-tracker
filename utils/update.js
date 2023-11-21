@@ -30,6 +30,16 @@ module.exports = async (interaction) => {
       hoursSinceLastLogin = `${hoursSinceLastLogin} hours ago`;
     }
 
+    const user = interaction.guild.members.cache.find(
+      (member) => member.user.tag === accounts[i].lastUser
+    );
+
+    let username = '';
+
+    if (user) {
+      username = user.user.displayName;
+    }
+
     fields.push(
       { name: accounts[i].name, value: '\u200B', inline: true },
       {
@@ -38,7 +48,7 @@ module.exports = async (interaction) => {
         inline: true,
       },
       {
-        name: accounts[i].lastUser ? accounts[i].lastUser : 'No one',
+        name: accounts[i].lastUser ? username : 'No one',
         value: `${hoursSinceLastLogin}`,
         inline: true,
       }
