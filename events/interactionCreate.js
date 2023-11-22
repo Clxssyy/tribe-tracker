@@ -74,6 +74,7 @@ module.exports = {
               available: true,
               lastUser: interaction.user.tag,
               currentUser: null,
+              lastLogin: Date.now(),
             }
           );
 
