@@ -13,7 +13,6 @@ module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction) {
     interaction.deferReply({ ephemeral: true });
-    interaction.deferUpdate();
 
     if (interaction.isButton()) {
       if (interaction.customId === 'login') {
