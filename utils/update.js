@@ -1,6 +1,7 @@
 const displaySchema = require('../schemas/display');
 const accountSchema = require('../schemas/account');
 const { EmbedBuilder } = require('discord.js');
+const account = require('../schemas/account');
 
 module.exports = async (interaction) => {
   const display = await displaySchema.findOne({
@@ -48,7 +49,7 @@ module.exports = async (interaction) => {
         inline: true,
       },
       {
-        name: user ? username : 'No one',
+        name: user ? username : accounts[i].lastUser,
         value: `${hoursSinceLastLogin}`,
         inline: true,
       }
