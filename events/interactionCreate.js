@@ -13,7 +13,6 @@ module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction) {
     if (interaction.isButton()) {
-      interaction.deferReply({ ephemeral: true });
       if (interaction.customId === 'login') {
         const data = await accountSchema.findOne({
           currentUser: interaction.user.tag,
