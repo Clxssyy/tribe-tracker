@@ -48,7 +48,7 @@ module.exports = async (interaction) => {
         inline: true,
       },
       {
-        name: accounts[i].lastUser ? username : 'No one',
+        name: user ? username : 'No one',
         value: `${hoursSinceLastLogin}`,
         inline: true,
       }
