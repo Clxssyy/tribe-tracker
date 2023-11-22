@@ -13,12 +13,13 @@ module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction) {
     if (interaction.isButton()) {
+      interaction.deferReply({ ephemeral: true });
       if (interaction.customId === 'login') {
         const data = await accountSchema.findOne({
           currentUser: interaction.user.tag,
         });
         if (data) {
-          return interaction.reply({
+          return interaction.editReply({
             ephemeral: true,
             content:
               "You're already logged in as **" +
@@ -50,7 +51,7 @@ module.exports = {
         }
         const row = new ActionRowBuilder().addComponents(buttons);
 
-        interaction.reply({
+        interaction.editReply({
           ephemeral: true,
           content: 'Which account are you logging in as?',
           components: [row],
@@ -63,7 +64,7 @@ module.exports = {
         });
 
         if (!data) {
-          return interaction.reply({
+          return interaction.editReply({
             ephemeral: true,
             content: 'You are not logged in!',
           });
@@ -80,7 +81,7 @@ module.exports = {
 
           update(interaction);
 
-          interaction.reply({
+          interaction.editReply({
             ephemeral: true,
             content: 'You have clocked out!',
           });
@@ -88,7 +89,7 @@ module.exports = {
       }
 
       if (interaction.customId === 'reload') {
-        interaction.reply({
+        interaction.editReply({
           ephemeral: true,
           content: 'Reloading...',
         });
@@ -101,7 +102,7 @@ module.exports = {
           currentUser: interaction.user.tag,
         });
         if (data) {
-          return interaction.reply({
+          return interaction.editReply({
             ephemeral: true,
             content:
               "You're already logged in as **" +
@@ -121,7 +122,7 @@ module.exports = {
 
           update(interaction);
 
-          interaction.reply({
+          interaction.editReply({
             ephemeral: true,
             content: `You have logged in as **${interaction.component.label}**!\nPlease logout when you're done.`,
           });
