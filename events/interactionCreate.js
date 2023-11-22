@@ -19,7 +19,7 @@ module.exports = {
           currentUser: interaction.user.tag,
         });
         if (data) {
-          return interaction.channel.send({
+          return interaction.reply({
             ephemeral: true,
             content:
               "You're already logged in as **" +
@@ -51,7 +51,7 @@ module.exports = {
         }
         const row = new ActionRowBuilder().addComponents(buttons);
 
-        interaction.channel.send({
+        interaction.reply({
           ephemeral: true,
           content: 'Which account are you logging in as?',
           components: [row],
@@ -64,7 +64,7 @@ module.exports = {
         });
 
         if (!data) {
-          return interaction.channel.send({
+          return interaction.reply({
             ephemeral: true,
             content: 'You are not logged in!',
           });
@@ -81,7 +81,7 @@ module.exports = {
 
           update(interaction);
 
-          interaction.channel.send({
+          interaction.reply({
             ephemeral: true,
             content: 'You have clocked out!',
           });
@@ -89,7 +89,7 @@ module.exports = {
       }
 
       if (interaction.customId === 'reload') {
-        interaction.channel.send({
+        interaction.reply({
           ephemeral: true,
           content: 'Reloading...',
         });
@@ -102,7 +102,7 @@ module.exports = {
           currentUser: interaction.user.tag,
         });
         if (data) {
-          return interaction.channel.send({
+          return interaction.reply({
             ephemeral: true,
             content:
               "You're already logged in as **" +
@@ -122,7 +122,7 @@ module.exports = {
 
           update(interaction);
 
-          interaction.channel.send({
+          interaction.reply({
             ephemeral: true,
             content: `You have logged in as **${interaction.component.label}**!\nPlease logout when you're done.`,
           });
