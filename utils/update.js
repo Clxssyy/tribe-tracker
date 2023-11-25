@@ -1,7 +1,6 @@
 const displaySchema = require('../schemas/display');
 const accountSchema = require('../schemas/account');
 const { EmbedBuilder } = require('discord.js');
-const account = require('../schemas/account');
 
 module.exports = async (interaction) => {
   const display = await displaySchema.findOne({
