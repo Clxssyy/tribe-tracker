@@ -17,19 +17,6 @@ module.exports = async (interaction) => {
   ];
 
   for (let i = 0; i < accounts.length; i++) {
-    let date = accounts[i].lastLogin;
-    let hoursSinceLastLogin = '';
-
-    if (!date) {
-      hoursSinceLastLogin = 'Never';
-    } else {
-      const lastLoginTime = new Date(date);
-      const currentTime = new Date();
-      const timeDifference = Math.abs(currentTime - lastLoginTime);
-      hoursSinceLastLogin = Math.floor(timeDifference / (1000 * 60 * 60));
-      hoursSinceLastLogin = `${hoursSinceLastLogin} hours ago`;
-    }
-
     const user = interaction.guild.members.cache.find(
       (member) => member.user.tag === accounts[i].lastUser
     );
@@ -49,7 +36,7 @@ module.exports = async (interaction) => {
       },
       {
         name: user ? username : accounts[i].lastUser,
-        value: `${hoursSinceLastLogin}`,
+        value: `<t:${Math.floor(accounts[i].lastLogin / 1000)}:R>`,
         inline: true,
       }
     );

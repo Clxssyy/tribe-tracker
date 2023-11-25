@@ -44,20 +44,7 @@ module.exports = {
     const accounts = await accountSchema.find();
 
     for (let i = 0; i < accounts.length; i++) {
-      let date = accounts[i].lastLogin;
-      let hoursSinceLastLogin = '';
-
-      if (!date) {
-        hoursSinceLastLogin = 'Never';
-      } else {
-        const lastLoginTime = new Date(date);
-        const currentTime = new Date();
-        const timeDifference = Math.abs(currentTime - lastLoginTime);
-        hoursSinceLastLogin = Math.floor(
-          timeDifference / (1000 * 60 * 60)
-        );
-        hoursSinceLastLogin = `${hoursSinceLastLogin} hours ago`;
-      }
+      const date = accounts[i].lastLogin;
 
       fields.push(
         { name: accounts[i].name, value: '\u200B', inline: true },
@@ -68,7 +55,9 @@ module.exports = {
         },
         {
           name: accounts[i].lastUser ? accounts[i].lastUser : 'No one',
-          value: `${hoursSinceLastLogin}`,
+          value: date
+            ? `<t:${Math.floor(accounts[i].lastLogin / 1000)}:R>`
+            : 'Never',
           inline: true,
         }
       );
