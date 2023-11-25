@@ -8,15 +8,7 @@ require('dotenv').config();
 deployCommands();
 
 const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMembers,
-    GatewayIntentBits.GuildMessageTyping,
-    GatewayIntentBits.GuildVoiceStates,
-    GatewayIntentBits.MessageContent,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildMessageReactions,
-  ],
+  intents: [GatewayIntentBits.Guilds],
 });
 
 client.commands = new Collection();
